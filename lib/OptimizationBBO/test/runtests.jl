@@ -158,3 +158,12 @@ using Test
         end
     end
 end
+
+# Max sense test 
+J(x,p) = x[1]
+
+F = OptimizationFunction(J)
+prob = Optimization.OptimizationProblem(F, [0.0]; lb = [-10], ub =[10], sense = MaxSense)
+sol = solve(prob, BBO_adaptive_de_rand_1_bin_radiuslimited())
+
+@test sol.objective == 10.0
